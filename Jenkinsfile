@@ -9,15 +9,15 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Docker Build') {
             steps {
-                echo 'Running tests...'
+                bat 'docker build -t devops-lab-app .'
             }
         }
 
-        stage('Deploy') {
+        stage('Docker Run') {
             steps {
-                echo 'Deploying application...'
+                bat 'docker run -d -p 8081:80 --name devops-container devops-lab-app'
             }
         }
     }
